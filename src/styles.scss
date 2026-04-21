@@ -23,7 +23,7 @@ html, body {
 
 
 section {
-  height: 100vh; /* Cada sección ocupa el 100% de la pantalla */
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,93 +1,161 @@
 <!-- Navbar -->
-<nav class="navbar">
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About me</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
+<nav class="navbar" [class.scrolled]="activeSection !== 'home'">
+  <div class="navbar-brand">JCL</div>
+
+  <button class="hamburger" (click)="toggleMenu()" [class.open]="menuOpen" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <ul [class.open]="menuOpen">
+    <li><a href="#home"     [class.active]="activeSection === 'home'"     (click)="closeMenu()">Home</a></li>
+    <li><a href="#about"    [class.active]="activeSection === 'about'"    (click)="closeMenu()">About me</a></li>
+    <li><a href="#projects" [class.active]="activeSection === 'projects'" (click)="closeMenu()">Projects</a></li>
+    <li><a href="#contact"  [class.active]="activeSection === 'contact'"  (click)="closeMenu()">Contact</a></li>
   </ul>
 </nav>
 
 <!-- Hero Section -->
 <section id="home" class="hero">
-  <img class="main-img" src="assets/portrait.png" alt="a" />
-  <h1><span class="highlight">Juan Carlos</span> López Fenoy</h1>
-  <span>Full Stack Developer </span>
+  <div class="hero-content">
+    <p class="hero-greeting">Hi, I'm</p>
+    <h1><span class="highlight">Juan Carlos</span><br>López Fenoy</h1>
+    <p class="hero-role">Full Stack Developer</p>
 
-  <i class="fa-solid fa-arrow-down"></i>
+    <div class="hero-tags">
+      <span>Angular</span>
+      <span>Node.js</span>
+      <span>TypeScript</span>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View projects</a>
+      <a href="#contact" class="btn btn-outline">Contact me</a>
+    </div>
+  </div>
+
+  <div class="hero-img-wrapper">
+    <img class="main-img" src="assets/portrait.png" alt="Juan Carlos López" />
+  </div>
+
+  <a href="#about" class="scroll-hint" aria-label="Scroll down">
+    <i class="fa-solid fa-arrow-down"></i>
+  </a>
 </section>
 
 <!-- About Section -->
 <section id="about" class="about">
   <div class="about-img-container">
-    <img class="about-img" src="assets/portrait.png" alt="a" />
+    <img class="about-img" src="assets/portrait.png" alt="Juan Carlos López" />
   </div>
-  <div class="about-container">
-    <h1>About me</h1>
-    <div>
-      <p>I am a full-stack developer with experience in Angular and Node.js.</p>
-      <p>
-        While I specialize in frontend development, I also enjoy working on the
-        backend.
-      </p>
-      <p>
-        I have always valued versatility and strive to be adaptable across
-        different aspects of development.
-      </p>
+
+  <div class="about-content">
+    <p class="about-label">About me</p>
+    <h2>Full Stack Developer<br>based in Spain</h2>
+
+    <div class="about-text">
+      <p>I'm a full-stack developer with experience in <strong>Angular</strong> and <strong>Node.js</strong>, focused on building clean and performant web applications.</p>
+      <p>I specialize in frontend development but enjoy working across the full stack, and I always strive to be adaptable to whatever the project needs.</p>
     </div>
-    <i class="fa-solid fa-arrow-down"></i>
+
+    <div class="about-skills">
+      <div class="skill"><i class="fa-brands fa-angular"></i><span>Angular</span></div>
+      <div class="skill"><i class="fa-brands fa-node-js"></i><span>Node.js</span></div>
+      <div class="skill"><i class="fa-brands fa-js"></i><span>TypeScript</span></div>
+      <div class="skill"><i class="fa-brands fa-git-alt"></i><span>Git</span></div>
+    </div>
   </div>
+
+  <a href="#projects" class="scroll-hint" aria-label="Scroll down">
+    <i class="fa-solid fa-arrow-down"></i>
+  </a>
 </section>
 
 <!-- Projects Section -->
 <section id="projects" class="projects">
-  <h2>My projects</h2>
+  <div class="section-header">
+    <p class="section-label">What I've built</p>
+    <h2>My projects</h2>
+  </div>
+
   <div class="projects-container">
     <app-project-card
-    title="Mis huevos"
-    icon="fa-brands fa-angular"
-    info="Font Awesome is the internet's icon library and toolkit used by millions of designers, developers, and content creators.
-    Made with  and  in Bentonville, Boston, Chicago, Grand Rapids, Joplin, Kansas City, Seattle, Tampa, and Vergennes."
+      title="Task Manager"
+      icon="fa-brands fa-angular"
+      info="Full-stack task management app built with Angular and Node.js. Features real-time updates, user authentication and a REST API backend."
+      githubLink=""
     ></app-project-card>
     <app-project-card
-    title="Mis huevos"
-    icon="fa-brands fa-angular"
-    info="Font Awesome is the internet's icon library and toolkit used by millions of designers, developers, and content creators.
-    Made with  and  in Bentonville, Boston, Chicago, Grand Rapids, Joplin, Kansas City, Seattle, Tampa, and Vergennes."
-    ></app-project-card><app-project-card
-    title="Mis huevos"
-    icon="fa-brands fa-angular"
-    info="Font Awesome is the internet's icon library and toolkit used by millions of designers, developers, and content creators.
-    Made with  and  in Bentonville, Boston, Chicago, Grand Rapids, Joplin, Kansas City, Seattle, Tampa, and Vergennes."
-    ></app-project-card><app-project-card
-    title="Mis huevos"
-    icon="fa-brands fa-angular"
-    info="Font Awesome is the internet's icon library and toolkit used by millions of designers, developers, and content creators.
-    Made with  and  in Bentonville, Boston, Chicago, Grand Rapids, Joplin, Kansas City, Seattle, Tampa, and Vergennes."
+      title="Portfolio"
+      icon="fa-solid fa-code"
+      info="Personal portfolio built with Angular 19 standalone components. Fully responsive with scroll-snap sections and smooth animations."
+      githubLink=""
+    ></app-project-card>
+    <app-project-card
+      title="REST API"
+      icon="fa-brands fa-node-js"
+      info="RESTful API built with Node.js and Express. Includes JWT authentication, input validation and full CRUD operations."
+      githubLink=""
+    ></app-project-card>
+    <app-project-card
+      title="E-commerce UI"
+      icon="fa-solid fa-cart-shopping"
+      info="Responsive e-commerce frontend with Angular. Product catalog, shopping cart, filters and checkout flow."
+      githubLink=""
     ></app-project-card>
   </div>
-  <i class="fa-solid fa-arrow-down"></i>
+
+  <a href="#contact" class="scroll-hint" aria-label="Scroll down">
+    <i class="fa-solid fa-arrow-down"></i>
+  </a>
 </section>
 
 
 <!-- Contact Section -->
-<section  id="contact" class="contact">
-  <h2>Contact me</h2>
-  <form>
-    <input type="text" placeholder="Your name" />
-    <input type="email" placeholder="Your email" />
-    <textarea placeholder="Message"></textarea>
-    <button type="submit">Send</button>
-  </form>
+<section id="contact" class="contact">
+  <div class="contact-form-col">
+    <div class="section-header">
+      <p class="section-label">Get in touch</p>
+      <h2>Contact me</h2>
+    </div>
 
-  <!-- Imagen con animación activada solo cuando la sección de contacto es visible -->
-  <div class="contact-img-container">
-  <img
-    #contactImg
-    class="contact-img"
-    src="assets/portrait.png"
-    alt="Profile Picture"
-  />
+    <form class="contact-form">
+      <div class="form-group">
+        <input type="text" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="Your email" />
+      </div>
+      <div class="form-group">
+        <textarea placeholder="Your message" rows="5"></textarea>
+      </div>
+      <button type="submit" class="btn-send">
+        Send message <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </form>
+  </div>
+
+  <div class="contact-info-col">
+    <p class="contact-desc">
+      I'm always open to new opportunities and collaborations.<br>
+      Feel free to reach out!
+    </p>
+
+    <div class="contact-links">
+      <a href="mailto:your@email.com" class="contact-link">
+        <i class="fa-solid fa-envelope"></i>
+        <span>your&#64;email.com</span>
+      </a>
+      <a href="https://github.com/" target="_blank" rel="noopener" class="contact-link">
+        <i class="fa-brands fa-github"></i>
+        <span>github.com/yourusername</span>
+      </a>
+      <a href="https://linkedin.com/" target="_blank" rel="noopener" class="contact-link">
+        <i class="fa-brands fa-linkedin"></i>
+        <span>linkedin.com/in/yourusername</span>
+      </a>
+    </div>
   </div>
 </section>
 
