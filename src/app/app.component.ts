@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardComponent } from "./components/project-card/project-card.component";
+import { translations, Lang } from './translations';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +10,21 @@ import { ProjectCardComponent } from "./components/project-card/project-card.com
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'portfolio';
   menuOpen = false;
   activeSection = 'home';
+  lang = signal<Lang>('en');
 
-  private observer!: IntersectionObserver;
+  get t() { return translations[this.lang()]; }
+
+  toggleLang() {
+    this.lang.set(this.lang() === 'en' ? 'es' : 'en');
+  }
+
+  private sectionObserver!: IntersectionObserver;
+  private revealObserver!: IntersectionObserver;
 
   ngOnInit() {
-    this.observer = new IntersectionObserver(
+    this.sectionObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
@@ -24,21 +32,32 @@ export class AppComponent implements OnInit, OnDestroy {
           }
         }
       },
-      {
-        root: document.body,
-        rootMargin: '-40% 0px -40% 0px',
-        threshold: 0
-      }
+      { root: document.body, rootMargin: '-40% 0px -40% 0px', threshold: 0 }
     );
 
     ['home', 'about', 'projects', 'contact'].forEach(id => {
       const el = document.getElementById(id);
-      if (el) this.observer.observe(el);
+      if (el) this.sectionObserver.observe(el);
     });
+
+    this.revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            this.revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { root: document.body, rootMargin: '0px 0px -8% 0px', threshold: 0.05 }
+    );
+
+    document.querySelectorAll('.reveal').forEach(el => this.revealObserver.observe(el));
   }
 
   ngOnDestroy() {
-    this.observer.disconnect();
+    this.sectionObserver.disconnect();
+    this.revealObserver.disconnect();
   }
 
   toggleMenu() {

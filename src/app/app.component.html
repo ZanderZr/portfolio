@@ -2,26 +2,29 @@
 <nav class="navbar" [class.scrolled]="activeSection !== 'home'">
   <div class="navbar-brand">JCL</div>
 
-  <button class="hamburger" (click)="toggleMenu()" [class.open]="menuOpen" aria-label="Toggle menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-
   <ul [class.open]="menuOpen">
-    <li><a href="#home"     [class.active]="activeSection === 'home'"     (click)="closeMenu()">Home</a></li>
-    <li><a href="#about"    [class.active]="activeSection === 'about'"    (click)="closeMenu()">About me</a></li>
-    <li><a href="#projects" [class.active]="activeSection === 'projects'" (click)="closeMenu()">Projects</a></li>
-    <li><a href="#contact"  [class.active]="activeSection === 'contact'"  (click)="closeMenu()">Contact</a></li>
+    <li><a href="#home"     [class.active]="activeSection === 'home'"     (click)="closeMenu()">{{ t.nav.home }}</a></li>
+    <li><a href="#about"    [class.active]="activeSection === 'about'"    (click)="closeMenu()">{{ t.nav.about }}</a></li>
+    <li><a href="#projects" [class.active]="activeSection === 'projects'" (click)="closeMenu()">{{ t.nav.projects }}</a></li>
+    <li><a href="#contact"  [class.active]="activeSection === 'contact'"  (click)="closeMenu()">{{ t.nav.contact }}</a></li>
   </ul>
+
+  <div class="navbar-actions">
+    <button class="lang-btn" (click)="toggleLang()">{{ lang() === 'en' ? 'ES' : 'EN' }}</button>
+    <button class="hamburger" (click)="toggleMenu()" [class.open]="menuOpen" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- Hero Section -->
 <section id="home" class="hero">
   <div class="hero-content">
-    <p class="hero-greeting">Hi, I'm</p>
+    <p class="hero-greeting">{{ t.hero.greeting }}</p>
     <h1><span class="highlight">Juan Carlos</span><br>López Fenoy</h1>
-    <p class="hero-role">Full Stack Developer</p>
+    <p class="hero-role">{{ t.hero.role }}</p>
 
     <div class="hero-tags">
       <span>Angular</span>
@@ -30,8 +33,8 @@
     </div>
 
     <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">View projects</a>
-      <a href="#contact" class="btn btn-outline">Contact me</a>
+      <a href="#projects" class="btn btn-primary">{{ t.hero.cta_projects }}</a>
+      <a href="#contact"  class="btn btn-outline">{{ t.hero.cta_contact }}</a>
     </div>
   </div>
 
@@ -46,17 +49,17 @@
 
 <!-- About Section -->
 <section id="about" class="about">
-  <div class="about-img-container">
+  <div class="about-img-container reveal from-left">
     <img class="about-img" src="assets/portrait.png" alt="Juan Carlos López" />
   </div>
 
-  <div class="about-content">
-    <p class="about-label">About me</p>
-    <h2>Full Stack Developer<br>based in Spain</h2>
+  <div class="about-content reveal from-right">
+    <p class="about-label">{{ t.about.label }}</p>
+    <h2 [innerHTML]="t.about.title"></h2>
 
     <div class="about-text">
-      <p>I'm a full-stack developer with experience in <strong>Angular</strong> and <strong>Node.js</strong>, focused on building clean and performant web applications.</p>
-      <p>I specialize in frontend development but enjoy working across the full stack, and I always strive to be adaptable to whatever the project needs.</p>
+      <p [innerHTML]="t.about.p1"></p>
+      <p [innerHTML]="t.about.p2"></p>
     </div>
 
     <div class="about-skills">
@@ -74,34 +77,34 @@
 
 <!-- Projects Section -->
 <section id="projects" class="projects">
-  <div class="section-header">
-    <p class="section-label">What I've built</p>
-    <h2>My projects</h2>
+  <div class="section-header reveal">
+    <p class="section-label">{{ t.projects.label }}</p>
+    <h2>{{ t.projects.title }}</h2>
   </div>
 
   <div class="projects-container">
-    <app-project-card
-      title="Task Manager"
-      icon="fa-brands fa-angular"
-      info="Full-stack task management app built with Angular and Node.js. Features real-time updates, user authentication and a REST API backend."
+    <app-project-card class="reveal" style="transition-delay: 0.05s"
+      [title]="t.projects.items[0].title"
+      [icon]="t.projects.items[0].icon"
+      [info]="t.projects.items[0].info"
       githubLink=""
     ></app-project-card>
-    <app-project-card
-      title="Portfolio"
-      icon="fa-solid fa-code"
-      info="Personal portfolio built with Angular 19 standalone components. Fully responsive with scroll-snap sections and smooth animations."
+    <app-project-card class="reveal" style="transition-delay: 0.15s"
+      [title]="t.projects.items[1].title"
+      [icon]="t.projects.items[1].icon"
+      [info]="t.projects.items[1].info"
       githubLink=""
     ></app-project-card>
-    <app-project-card
-      title="REST API"
-      icon="fa-brands fa-node-js"
-      info="RESTful API built with Node.js and Express. Includes JWT authentication, input validation and full CRUD operations."
+    <app-project-card class="reveal" style="transition-delay: 0.25s"
+      [title]="t.projects.items[2].title"
+      [icon]="t.projects.items[2].icon"
+      [info]="t.projects.items[2].info"
       githubLink=""
     ></app-project-card>
-    <app-project-card
-      title="E-commerce UI"
-      icon="fa-solid fa-cart-shopping"
-      info="Responsive e-commerce frontend with Angular. Product catalog, shopping cart, filters and checkout flow."
+    <app-project-card class="reveal" style="transition-delay: 0.35s"
+      [title]="t.projects.items[3].title"
+      [icon]="t.projects.items[3].icon"
+      [info]="t.projects.items[3].info"
       githubLink=""
     ></app-project-card>
   </div>
@@ -111,36 +114,32 @@
   </a>
 </section>
 
-
 <!-- Contact Section -->
 <section id="contact" class="contact">
-  <div class="contact-form-col">
+  <div class="contact-form-col reveal from-left">
     <div class="section-header">
-      <p class="section-label">Get in touch</p>
-      <h2>Contact me</h2>
+      <p class="section-label">{{ t.contact.label }}</p>
+      <h2>{{ t.contact.title }}</h2>
     </div>
 
     <form class="contact-form">
       <div class="form-group">
-        <input type="text" placeholder="Your name" />
+        <input type="text" [placeholder]="t.contact.name" />
       </div>
       <div class="form-group">
-        <input type="email" placeholder="Your email" />
+        <input type="email" [placeholder]="t.contact.email" />
       </div>
       <div class="form-group">
-        <textarea placeholder="Your message" rows="5"></textarea>
+        <textarea [placeholder]="t.contact.message" rows="5"></textarea>
       </div>
       <button type="submit" class="btn-send">
-        Send message <i class="fa-solid fa-paper-plane"></i>
+        {{ t.contact.send }} <i class="fa-solid fa-paper-plane"></i>
       </button>
     </form>
   </div>
 
-  <div class="contact-info-col">
-    <p class="contact-desc">
-      I'm always open to new opportunities and collaborations.<br>
-      Feel free to reach out!
-    </p>
+  <div class="contact-info-col reveal from-right">
+    <p class="contact-desc">{{ t.contact.desc }}</p>
 
     <div class="contact-links">
       <a href="mailto:your@email.com" class="contact-link">
@@ -158,4 +157,3 @@
     </div>
   </div>
 </section>
-
