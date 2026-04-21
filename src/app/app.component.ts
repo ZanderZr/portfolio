@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { ProjectCardComponent } from "./components/project-card/project-card.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [ProjectCardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
