@@ -18,7 +18,13 @@ html, body {
   scroll-behavior: smooth;
   overflow-y: scroll;
   height: 100vh;
-  background-image: radial-gradient(#2c0f3d, #1b062c, #000000); /* El gradiente fijo */
+  background-image: radial-gradient(#2c0f3d, #1b062c, #000000);
+}
+
+body.no-snap {
+  scroll-snap-type: none;
+  height: auto;
+  overflow-y: auto;
 }
 
 

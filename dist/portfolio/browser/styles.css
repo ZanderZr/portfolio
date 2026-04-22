@@ -1,0 +1,67 @@
+@import "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap";
+
+/* src/styles.scss */
+:root {
+  --primary-color:#ffd000;
+  --secondary-color: #c08300;
+  --text-color: #ffffff;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+html,
+body {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  height: 100vh;
+  background-image:
+    radial-gradient(
+      #2c0f3d,
+      #1b062c,
+      #000000);
+}
+body.no-snap {
+  scroll-snap-type: none;
+  height: auto;
+  overflow-y: auto;
+}
+section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1), transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal.from-left {
+  transform: translateX(-40px);
+}
+.reveal.from-right {
+  transform: translateX(40px);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* angular:styles/global:styles */
+/*# sourceMappingURL=styles.css.map */

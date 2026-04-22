@@ -1,4 +1,5 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-card',
@@ -7,13 +8,25 @@ import { Component, Input, Output } from '@angular/core';
   styleUrl: './project-card.component.scss'
 })
 export class ProjectCardComponent {
+  private router = inject(Router);
 
   @Input() title: string = '';
   @Input() info: string = '';
   @Input() icon: string = '';
   @Input() githubLink: string = '';
+  @Input() detailLink: string = '';
+  @Input() btnLabel: string = 'Github';
+  @Input() btnIcon: string = 'fa-brands fa-github';
 
-  buttonClick(){
-    window.open(this.githubLink, '_blank');
+  handleClick() {
+    if (this.detailLink) {
+      this.router.navigate([this.detailLink]);
+    } else if (this.githubLink) {
+      window.open(this.githubLink, '_blank');
+    }
+  }
+
+  get hasAction(): boolean {
+    return !!(this.detailLink || this.githubLink);
   }
 }

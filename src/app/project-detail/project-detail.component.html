@@ -1,0 +1,63 @@
+<div class="detail-page">
+
+  <nav class="detail-nav">
+    <button class="back-btn" (click)="goBack()">
+      <i class="fa-solid fa-arrow-left"></i>
+      {{ t.intraapp.back }}
+    </button>
+    <button class="lang-btn" (click)="langService.toggle()">{{ lang() === 'en' ? 'ES' : 'EN' }}</button>
+  </nav>
+
+  <div class="detail-container">
+
+    <header class="detail-header">
+      <span class="badge">
+        <i class="fa-solid fa-briefcase"></i>
+        {{ t.intraapp.badge }}
+      </span>
+      <h1>IntraApp + IntraApi</h1>
+      <p class="subtitle">{{ t.intraapp.subtitle }}</p>
+    </header>
+
+    <p class="overview">{{ t.intraapp.desc }}</p>
+
+    <div class="detail-section">
+      <h2>{{ t.intraapp.stack_title }}</h2>
+      <div class="stack-grid">
+        @for (item of stackItems; track item.layer) {
+          <div class="stack-row">
+            <span class="layer">{{ item.layer }}</span>
+            <span class="tech">{{ item.tech }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h2>{{ t.intraapp.highlights_title }}</h2>
+      <ul class="highlights">
+        @for (h of t.intraapp.highlights; track h) {
+          <li>{{ h }}</li>
+        }
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h2>{{ t.intraapp.metrics_title }}</h2>
+      <div class="metrics-grid">
+        @for (m of metrics; track m.value) {
+          <div class="metric">
+            <span class="value">{{ m.value }}</span>
+            <span class="label">{{ m.label }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="confidential-note">
+      <i class="fa-solid fa-lock"></i>
+      {{ t.intraapp.confidential }}
+    </div>
+
+  </div>
+</div>

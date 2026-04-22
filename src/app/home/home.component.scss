@@ -37,6 +37,7 @@
       letter-spacing: 0.5px;
       transition: color 0.3s;
       position: relative;
+      cursor: pointer;
 
       &::after {
         content: '';
@@ -225,6 +226,7 @@
         font-size: 0.95rem;
         text-decoration: none;
         transition: all 0.3s;
+        cursor: pointer;
 
         &-primary {
           background: var(--primary-color);
@@ -270,6 +272,7 @@
     font-size: 1.4rem;
     animation: bounce 2s ease-in-out infinite;
     text-decoration: none;
+    cursor: pointer;
   }
 
   @media (max-width: 768px) {
@@ -310,7 +313,6 @@
     &::before {
       content: '';
       position: absolute;
-
       transform: translate(10px, 10px);
     }
 
@@ -402,6 +404,7 @@
     font-size: 1.4rem;
     animation: bounce 2s ease-in-out infinite;
     text-decoration: none;
+    cursor: pointer;
   }
 
   @media (max-width: 768px) {
@@ -469,6 +472,7 @@
     font-size: 1.4rem;
     animation: bounce 2s ease-in-out infinite;
     text-decoration: none;
+    cursor: pointer;
   }
 
   @media (max-width: 768px) {
@@ -486,7 +490,6 @@
     }
   }
 }
-
 
 
 .contact {
@@ -665,10 +668,3 @@
     }
   }
 }
-
-
-
-
-
-
-
