@@ -86,14 +86,16 @@
   </div>
 
   <div class="projects-container">
-    <app-project-card class="reveal" style="transition-delay: 0.05s"
-      [title]="t.projects.items[0].title"
-      [icon]="t.projects.items[0].icon"
-      [info]="t.projects.items[0].info"
-      [btnLabel]="lang() === 'en' ? 'View project' : 'Ver proyecto'"
-      btnIcon="fa-solid fa-arrow-right"
-      detailLink="/intraapp"
-    ></app-project-card>
+    <!-- track $index: al cambiar de idioma se reutilizan los nodos y no se pierde la clase .visible -->
+    @for (project of t.projects.items; track $index) {
+      <app-project-card class="reveal"
+        [style.transition-delay]="0.05 + $index * 0.1 + 's'"
+        [title]="project.title"
+        [icon]="project.icon"
+        [info]="project.info"
+        [actions]="actionsFor(project.slug)"
+      ></app-project-card>
+    }
   </div>
 
   <a (click)="scrollTo('contact')" class="scroll-hint" aria-label="Scroll down">

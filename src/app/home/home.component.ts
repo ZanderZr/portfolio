@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ProjectCardComponent } from '../components/project-card/project-card.component';
+import { ProjectCardComponent, CardAction } from '../components/project-card/project-card.component';
 import { translations } from '../translations';
+import { projectLinks, ACTION_ICONS } from '../projects';
 import { LangService } from '../lang.service';
 
 const WEB3FORMS_KEY = '437b9208-5f2d-49fb-831f-fb62b5333370';
@@ -14,7 +15,7 @@ const WEB3FORMS_KEY = '437b9208-5f2d-49fb-831f-fb62b5333370';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements AfterViewInit, OnDestroy {
   private fb = inject(FormBuilder);
   private http = inject(HttpClient);
   langService = inject(LangService);
@@ -32,10 +33,20 @@ export class HomeComponent implements OnInit, OnDestroy {
   get t() { return translations[this.langService.lang()]; }
   get lang() { return this.langService.lang; }
 
+  actionsFor(slug: string): CardAction[] {
+    return (projectLinks[slug] ?? []).map(link => ({
+      ...link,
+      label: this.t.actions[link.kind],
+      icon: ACTION_ICONS[link.kind]
+    }));
+  }
+
   private sectionObserver!: IntersectionObserver;
   private revealObserver!: IntersectionObserver;
 
-  ngOnInit() {
+  // ngAfterViewInit y no ngOnInit: las tarjetas del @for se crean en la primera
+  // deteccion de cambios, asi que en ngOnInit todavia no estan en el DOM.
+  ngAfterViewInit() {
     this.sectionObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {

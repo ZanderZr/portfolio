@@ -457,10 +457,13 @@
 
   .projects-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    // auto-fit + ancho de pista acotado: las columnas vacias colapsan, asi que
+    // con pocas tarjetas la fila queda centrada en vez de pegada a la izquierda.
+    grid-template-columns: repeat(auto-fit, minmax(230px, 260px));
+    justify-content: center;
     gap: 1.5rem;
     width: 100%;
-    max-width: 1100px;
+    max-width: 860px; // tope de 3 tarjetas por fila
   }
 
   .scroll-hint {

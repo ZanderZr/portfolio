@@ -2,12 +2,14 @@
   <i [class]="icon"></i>
   <span class="title">{{title}}</span>
   <p class="info">{{info}}</p>
-  @if (hasAction) {
+  @if (actions.length) {
     <div class="share">
-      <button (click)="handleClick()">
-        <p>{{ btnLabel }}</p>
-        <i [class]="btnIcon"></i>
-      </button>
+      @for (action of actions; track action.url) {
+        <button (click)="run(action)" [class.secondary]="!$first">
+          <p>{{ action.label }}</p>
+          <i [class]="action.icon"></i>
+        </button>
+      }
     </div>
   }
 </div>

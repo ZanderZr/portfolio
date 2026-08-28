@@ -19,25 +19,58 @@ export const translations = {
       label: "What I've built",
       title: 'My projects',
       items: [
-        { title: 'IntraApp + IntraApi', icon: 'fa-solid fa-microchip', info: 'Cross-platform IoT platform for the agri-tech sector. BLE sensors, UWB real-time positioning, OTA firmware and LoRaWAN. Professional project.' }
+        { slug: 'intraapp',  icon: 'fa-solid fa-microchip', title: 'IntraApp + IntraApi',  info: 'Cross-platform IoT platform for the agri-tech sector. BLE sensors, UWB real-time positioning, OTA firmware and LoRaWAN. Professional project.' },
+        { slug: 'ticketera', icon: 'fa-solid fa-ticket',    title: 'Ticketing Platform',   info: 'Multi-tenant ticketing platform: Laravel API plus three Angular front-ends for backoffice, sales and door scanning. Collaboration — I worked on the backoffice and the API.' },
+        { slug: 'nutria',    icon: 'fa-solid fa-utensils',  title: 'NutrIA',               info: 'Local-first nutrition app. Describe a meal in plain language and Gemini estimates calories and macros. Ionic + Capacitor, SQLite on device, no accounts and no backend. Personal project.' }
       ]
     },
-    intraapp: {
+    actions: {
+      detail: 'View project',
+      demo: 'Live demo',
+      github: 'Source code'
+    },
+    detail: {
       back: 'Back to portfolio',
-      badge: 'Professional Work · Agri-tech IoT',
-      subtitle: 'IoT Device Management Platform',
-      desc: 'Cross-platform application for managing IoT sensor networks in agricultural environments. Covers end-to-end workflows: BLE device configuration, UWB real-time positioning, OTA firmware distribution, LoRaWAN network management and production monitoring via WebSocket and SSE.',
       stack_title: 'Tech Stack',
       highlights_title: 'Key Technical Challenges',
-      highlights: [
-        'Custom BLE protocol over ESP32: async message routing, firmware chunking, and a compact 21-sensor bitmask (Uint32)',
-        'Real-time state synchronisation across BLE + WebSocket + REST without a global state manager',
-        'Same codebase running on Android APK, web browser and desktop (Electron) via Capacitor',
-        'Dual charger IC support (MP2731 and BQ25622E) behind a unified interface',
-        'Multi-step calibration workflows with sequential modals and partial-save recovery'
-      ],
+      role_title: 'My Contribution',
       metrics_title: 'Scale',
       confidential: 'Confidential project — details available on request'
+    },
+    details: {
+      intraapp: {
+        badge: 'Professional Work · Agri-tech IoT',
+        subtitle: 'IoT Device Management Platform',
+        desc: 'Cross-platform application for managing IoT sensor networks in agricultural environments. Covers end-to-end workflows: BLE device configuration, UWB real-time positioning, OTA firmware distribution, LoRaWAN network management and production monitoring via WebSocket and SSE.',
+        highlights: [
+          'Custom BLE protocol over ESP32: async message routing, firmware chunking, and a compact 21-sensor bitmask (Uint32)',
+          'Real-time state synchronisation across BLE + WebSocket + REST without a global state manager',
+          'Same codebase running on Android APK, web browser and desktop (Electron) via Capacitor',
+          'Dual charger IC support (MP2731 and BQ25622E) behind a unified interface',
+          'Multi-step calibration workflows with sequential modals and partial-save recovery'
+        ],
+        role: [] as string[]
+      },
+      ticketera: {
+        badge: 'Collaboration · Live Events & Ticketing',
+        subtitle: 'Multi-tenant Ticketing Platform',
+        desc: 'Ticketing platform where each promoter runs as an independent tenant. A Laravel API drives three Angular front-ends: a backoffice for managing events and staff, a public storefront for sales, and a scanner for validating tickets at the door. Supporting infrastructure covers queue workers, ticket QR/PDF generation and time-series reporting.',
+        highlights: [
+          'Multi-tenant model: each promoter manages its own events, staff and sales in isolation',
+          'Three Angular front-ends sharing one API, each with its own auth flow and permissions',
+          'PostgreSQL with TimescaleDB for time-series sales and access reporting',
+          'Background workers for backups, purchase documents and media uploads',
+          'Docker-based local infrastructure with Nginx, Postgres and Redis'
+        ],
+        role: [
+          'Backoffice screens for the promoter workflow: event setup, artists, internal users and settings',
+          'Full promoter-rep (RRPP) management: rosters, bulk adding, invitations and resend flow',
+          'Multi-step forms and data tables for event and internal-user creation',
+          'Avatar upload replacing manual URL entry, wired through the API media pipeline',
+          'Standalone Go tooling that generates the ticket QR codes and the printable PDF tickets they are embedded in',
+          'The matching Laravel API endpoints, request validation, migrations and tests'
+        ]
+      }
     },
     contact: {
       label: 'Get in touch',
@@ -73,25 +106,58 @@ export const translations = {
       label: 'Lo que he construido',
       title: 'Mis proyectos',
       items: [
-        { title: 'IntraApp + IntraApi', icon: 'fa-solid fa-microchip', info: 'Plataforma IoT cross-platform para el sector agri-tech. Sensores BLE, posicionamiento UWB en tiempo real, firmware OTA y LoRaWAN. Proyecto profesional.' }
+        { slug: 'intraapp',  icon: 'fa-solid fa-microchip', title: 'IntraApp + IntraApi',    info: 'Plataforma IoT cross-platform para el sector agri-tech. Sensores BLE, posicionamiento UWB en tiempo real, firmware OTA y LoRaWAN. Proyecto profesional.' },
+        { slug: 'ticketera', icon: 'fa-solid fa-ticket',    title: 'Plataforma de Ticketing', info: 'Plataforma de ticketing multi-tenant: API en Laravel y tres fronts Angular para backoffice, venta y escaneo en puerta. Colaboración — trabajé en el backoffice y en la API.' },
+        { slug: 'nutria',    icon: 'fa-solid fa-utensils',  title: 'NutrIA',                  info: 'App de nutrición local-first. Describes la comida en lenguaje natural y Gemini estima calorías y macros. Ionic + Capacitor, SQLite en el dispositivo, sin cuentas ni backend. Proyecto personal.' }
       ]
     },
-    intraapp: {
+    actions: {
+      detail: 'Ver proyecto',
+      demo: 'Ver demo',
+      github: 'Código fuente'
+    },
+    detail: {
       back: 'Volver al portfolio',
-      badge: 'Trabajo Profesional · Agri-tech IoT',
-      subtitle: 'Plataforma de Gestión de Dispositivos IoT',
-      desc: 'Aplicación cross-platform para la gestión de redes de sensores IoT en entornos agrícolas. Cubre flujos end-to-end: configuración de dispositivos BLE, posicionamiento UWB en tiempo real, distribución de firmware OTA, gestión de redes LoRaWAN y monitorización en producción vía WebSocket y SSE.',
       stack_title: 'Stack Tecnológico',
       highlights_title: 'Retos Técnicos Clave',
-      highlights: [
-        'Protocolo BLE personalizado sobre ESP32: enrutado de mensajes asíncrono, chunking de firmware y bitmask compacto de 21 sensores (Uint32)',
-        'Sincronización de estado en tiempo real entre BLE + WebSocket + REST sin gestor de estado global',
-        'El mismo código corriendo en Android APK, navegador web y desktop (Electron) vía Capacitor',
-        'Soporte de dos ICs de carga (MP2731 y BQ25622E) tras una interfaz unificada',
-        'Guías de calibración multi-paso con modales secuenciales y recuperación de estado parcial'
-      ],
+      role_title: 'Mi Aportación',
       metrics_title: 'Escala',
       confidential: 'Proyecto confidencial — detalles disponibles bajo petición'
+    },
+    details: {
+      intraapp: {
+        badge: 'Trabajo Profesional · Agri-tech IoT',
+        subtitle: 'Plataforma de Gestión de Dispositivos IoT',
+        desc: 'Aplicación cross-platform para la gestión de redes de sensores IoT en entornos agrícolas. Cubre flujos end-to-end: configuración de dispositivos BLE, posicionamiento UWB en tiempo real, distribución de firmware OTA, gestión de redes LoRaWAN y monitorización en producción vía WebSocket y SSE.',
+        highlights: [
+          'Protocolo BLE personalizado sobre ESP32: enrutado de mensajes asíncrono, chunking de firmware y bitmask compacto de 21 sensores (Uint32)',
+          'Sincronización de estado en tiempo real entre BLE + WebSocket + REST sin gestor de estado global',
+          'El mismo código corriendo en Android APK, navegador web y desktop (Electron) vía Capacitor',
+          'Soporte de dos ICs de carga (MP2731 y BQ25622E) tras una interfaz unificada',
+          'Guías de calibración multi-paso con modales secuenciales y recuperación de estado parcial'
+        ],
+        role: [] as string[]
+      },
+      ticketera: {
+        badge: 'Colaboración · Eventos y Ticketing',
+        subtitle: 'Plataforma de Ticketing Multi-tenant',
+        desc: 'Plataforma de ticketing donde cada promotor funciona como un tenant independiente. Una API en Laravel da servicio a tres fronts Angular: un backoffice para gestionar eventos y personal, una tienda pública de venta y un escáner para validar entradas en puerta. Alrededor, workers en segundo plano, generación de QR y PDF de entradas e informes de series temporales.',
+        highlights: [
+          'Modelo multi-tenant: cada promotor gestiona sus eventos, personal y ventas de forma aislada',
+          'Tres fronts Angular sobre una misma API, cada uno con su propio flujo de autenticación y permisos',
+          'PostgreSQL con TimescaleDB para informes de ventas y accesos en series temporales',
+          'Workers en segundo plano para backups, documentos de compra y subida de medios',
+          'Infraestructura local con Docker, Nginx, Postgres y Redis'
+        ],
+        role: [
+          'Pantallas de backoffice del flujo de promotor: alta de eventos, artistas, usuarios internos y ajustes',
+          'Gestión completa de RRPP: listados, alta masiva, invitaciones y reenvío',
+          'Formularios multi-paso y tablas de datos para crear eventos y usuarios internos',
+          'Subida de avatar sustituyendo la introducción manual de URLs, conectada al pipeline de medios de la API',
+          'Utilidades standalone en Go que generan los QR de las entradas y los PDF imprimibles donde se embeben',
+          'Los endpoints correspondientes en la API Laravel, validación de peticiones, migraciones y tests'
+        ]
+      }
     },
     contact: {
       label: 'Ponte en contacto',

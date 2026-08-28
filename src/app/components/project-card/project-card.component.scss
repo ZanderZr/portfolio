@@ -1,3 +1,9 @@
+// El host es el item de la rejilla y estira a la altura de la fila; sin esto
+// la tarjeta no lo rellena y cada una queda de una altura distinta.
+:host {
+  display: flex;
+}
+
 .card {
   width: 100%;
   padding: 1.75rem 1.5rem;
@@ -39,6 +45,9 @@
   .share {
     margin-top: auto;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 
     button {
       width: 100%;
@@ -67,6 +76,22 @@
         color: #000;
 
         i { color: #000; }
+      }
+
+      // Accion secundaria: mas discreta para que la primaria siga mandando.
+      &.secondary {
+        border-color: transparent;
+        color: rgba(255, 255, 255, 0.6);
+
+        i { color: rgba(255, 255, 255, 0.6); }
+
+        &:hover {
+          background: transparent;
+          border-color: rgba(255, 255, 255, 0.15);
+          color: var(--primary-color);
+
+          i { color: var(--primary-color); }
+        }
       }
     }
   }

@@ -1,9 +1,10 @@
+@if (project) {
 <div class="detail-page">
 
   <nav class="detail-nav">
     <button class="back-btn" (click)="goBack()">
       <i class="fa-solid fa-arrow-left"></i>
-      {{ t.intraapp.back }}
+      {{ t.detail.back }}
     </button>
     <button class="lang-btn" (click)="langService.toggle()">{{ lang() === 'en' ? 'ES' : 'EN' }}</button>
   </nav>
@@ -13,18 +14,18 @@
     <header class="detail-header">
       <span class="badge">
         <i class="fa-solid fa-briefcase"></i>
-        {{ t.intraapp.badge }}
+        {{ text.badge }}
       </span>
-      <h1>IntraApp + IntraApi</h1>
-      <p class="subtitle">{{ t.intraapp.subtitle }}</p>
+      <h1>{{ project.title }}</h1>
+      <p class="subtitle">{{ text.subtitle }}</p>
     </header>
 
-    <p class="overview">{{ t.intraapp.desc }}</p>
+    <p class="overview">{{ text.desc }}</p>
 
     <div class="detail-section">
-      <h2>{{ t.intraapp.stack_title }}</h2>
+      <h2>{{ t.detail.stack_title }}</h2>
       <div class="stack-grid">
-        @for (item of stackItems; track item.layer) {
+        @for (item of project.stack; track item.layer) {
           <div class="stack-row">
             <span class="layer">{{ item.layer }}</span>
             <span class="tech">{{ item.tech }}</span>
@@ -34,18 +35,29 @@
     </div>
 
     <div class="detail-section">
-      <h2>{{ t.intraapp.highlights_title }}</h2>
+      <h2>{{ t.detail.highlights_title }}</h2>
       <ul class="highlights">
-        @for (h of t.intraapp.highlights; track h) {
+        @for (h of text.highlights; track h) {
           <li>{{ h }}</li>
         }
       </ul>
     </div>
 
+    @if (text.role.length) {
+      <div class="detail-section">
+        <h2>{{ t.detail.role_title }}</h2>
+        <ul class="highlights">
+          @for (r of text.role; track r) {
+            <li>{{ r }}</li>
+          }
+        </ul>
+      </div>
+    }
+
     <div class="detail-section">
-      <h2>{{ t.intraapp.metrics_title }}</h2>
+      <h2>{{ t.detail.metrics_title }}</h2>
       <div class="metrics-grid">
-        @for (m of metrics; track m.value) {
+        @for (m of project.metrics; track m.label) {
           <div class="metric">
             <span class="value">{{ m.value }}</span>
             <span class="label">{{ m.label }}</span>
@@ -56,8 +68,9 @@
 
     <div class="confidential-note">
       <i class="fa-solid fa-lock"></i>
-      {{ t.intraapp.confidential }}
+      {{ t.detail.confidential }}
     </div>
 
   </div>
 </div>
+}

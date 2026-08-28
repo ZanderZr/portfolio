@@ -1,5 +1,13 @@
 import { Component, Input, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActionKind } from '../../projects';
+
+export interface CardAction {
+  kind: ActionKind;
+  url: string;
+  label: string;
+  icon: string;
+}
 
 @Component({
   selector: 'app-project-card',
@@ -13,20 +21,13 @@ export class ProjectCardComponent {
   @Input() title: string = '';
   @Input() info: string = '';
   @Input() icon: string = '';
-  @Input() githubLink: string = '';
-  @Input() detailLink: string = '';
-  @Input() btnLabel: string = 'Github';
-  @Input() btnIcon: string = 'fa-brands fa-github';
+  @Input() actions: CardAction[] = [];
 
-  handleClick() {
-    if (this.detailLink) {
-      this.router.navigate([this.detailLink]);
-    } else if (this.githubLink) {
-      window.open(this.githubLink, '_blank');
+  run(action: CardAction) {
+    if (action.kind === 'detail') {
+      this.router.navigate([action.url]);
+    } else {
+      window.open(action.url, '_blank', 'noopener');
     }
-  }
-
-  get hasAction(): boolean {
-    return !!(this.detailLink || this.githubLink);
   }
 }

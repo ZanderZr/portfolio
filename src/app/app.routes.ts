@@ -4,6 +4,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'intraapp', component: ProjectDetailComponent },
+  { path: 'project/:slug', component: ProjectDetailComponent },
+  { path: 'intraapp', redirectTo: 'project/intraapp' },
   { path: '**', redirectTo: '' }
 ];

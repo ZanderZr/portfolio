@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { translations } from '../translations';
+import { projectDetails } from '../projects';
 import { LangService } from '../lang.service';
 
 @Component({
@@ -12,11 +13,24 @@ import { LangService } from '../lang.service';
 })
 export class ProjectDetailComponent implements OnInit, OnDestroy {
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   langService = inject(LangService);
+
+  slug = '';
 
   ngOnInit() {
     document.body.classList.add('no-snap');
-    window.scrollTo(0, 0);
+
+    this.route.paramMap.subscribe(params => {
+      const slug = params.get('slug') ?? '';
+      // Un slug desconocido vuelve al home en vez de renderizar una pagina vacia.
+      if (!projectDetails[slug]) {
+        this.router.navigate(['/']);
+        return;
+      }
+      this.slug = slug;
+      window.scrollTo(0, 0);
+    });
   }
 
   ngOnDestroy() {
@@ -26,27 +40,8 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   get t() { return translations[this.langService.lang()]; }
   get lang() { return this.langService.lang; }
 
-  stackItems = [
-    { layer: 'Frontend',        tech: 'Angular 17 · Ionic 7 · TypeScript 5.2' },
-    { layer: 'Cross-platform',  tech: 'Capacitor 5 (Android + Web + Electron)' },
-    { layer: 'Reactivity',      tech: 'RxJS 7.5 — BehaviorSubjects, reactive stores' },
-    { layer: 'UI',              tech: 'Angular Material 17 · Highcharts · Google Maps' },
-    { layer: 'Hardware',        tech: 'BLE via @capacitor-community/bluetooth-le · ESP32' },
-    { layer: 'Communication',   tech: 'REST · WebSocket (auto-reconnect) · SSE · MQTT' },
-    { layer: 'Backend',         tech: 'Node.js · TypeScript 5.7 · Express.js 4.21' },
-    { layer: 'ORM & DB',        tech: 'Sequelize 6.37 · MySQL (3 independent instances)' },
-    { layer: 'Auth & Security', tech: 'JWT · bcrypt · RBAC (7 roles) · API Key timing-safe' },
-    { layer: 'IoT Protocols',   tech: 'ChirpStack (LoRaWAN) · MQTT broker · OTA via FTP' },
-  ];
-
-  metrics = [
-    { value: '~319', label: 'TypeScript files' },
-    { value: '90+',  label: 'Services' },
-    { value: '150+', label: 'Components' },
-    { value: '5',    label: 'Lazy modules' },
-    { value: '35+',  label: 'Sequelize models' },
-    { value: '3',    label: 'MySQL databases' },
-  ];
+  get project() { return projectDetails[this.slug]; }
+  get text() { return this.t.details[this.slug as keyof typeof this.t.details]; }
 
   goBack() {
     this.router.navigate(['/']);
